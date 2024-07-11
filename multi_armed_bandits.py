@@ -97,14 +97,14 @@ for t in range(TRIALS,TRIALS*2):
         pw = [string_to_pauli_word(pss, wire_map={i:i for i in range(n_qubits)}) for pss in ps]
 
         observables = [qml.Hamiltonian([1.0], [pw[0]]), qml.Hamiltonian([1.0], [qml.PauliZ(0)@qml.PauliZ(1)@qml.PauliZ(2)@qml.PauliZ(3)])]
-        observables = [qml.Hamiltonian([1.0], [pword]) for pword in pw[1:]]
+        observables += [qml.Hamiltonian([1.0], [pword]) for pword in pw[1:]]
     elif p == "partialbest":
         ps = ["".join(comb) for comb in itertools.product(["X","Z"], repeat=n_qubits)][-(N_ACTIONS-1):]
 
         pw = [string_to_pauli_word(pss, wire_map={i:i for i in range(n_qubits)}) for pss in ps]
 
         observables = [qml.Hamiltonian([1.0], [qml.PauliZ(0)@qml.PauliZ(1)@qml.PauliZ(2)@qml.PauliZ(3)]),qml.Hamiltonian([1.0], [pw[0]])]
-        observables = [qml.Hamiltonian([1.0], [pword]) for pword in pw[1:]]
+        observables += [qml.Hamiltonian([1.0], [pword]) for pword in pw[1:]]
 
 
 
